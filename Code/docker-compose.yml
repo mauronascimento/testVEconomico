@@ -2,7 +2,7 @@ php7:
   build: .
   dockerfile: /home/projects/testVEconomico/Code/Dockerfile
   volumes:
-    - /home/projects/testVEconomico/:/var/www/html
+    - /home/projects/testVEconomico/Code/:/var/www/html
   ports:
     - "8080:80"
 

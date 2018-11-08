@@ -17,7 +17,7 @@ RUN /usr/local/bin/docker-php-ext-install zip
 RUN apt-get install -y libmcrypt-dev
 RUN docker-php-ext-install mcrypt
 
-RUN apt-get install -y php7.2-xml
+#RUN apt-get install php7.0.16-xml
 
 # Install GD
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng12-dev
@@ -37,11 +37,15 @@ RUN a2enmod rewrite
 RUN usermod -u 1000 www-data
 RUN usermod -G staff www-data
 
-RUN apt-get install vim
-RUN chmod -R 777 /var/www/
+RUN chmod -R 755 /var/www/
 
-RUN apt-get install composer
+#RUN cd /var/www/html/
 
+#RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+#RUN php -r "if (hash_file('sha384', 'composer-setup.php') === #'93b54496392c062774670ac18b134c3b3a95e5a5e5c8f1a9f115f203b75bf9a129d5daa8ba6a13e2cc8a1da0806388a8') { echo 'Installer #verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+#RUN php composer-setup.php
+#RUN php -r "unlink('composer-setup.php');"
 
-RUN cd /var/www/html/Code
-RUN composer install
+#ADD /home/projects/testVEconomico/Code/composer.json /var/www/html/
+
+#RUN php composer.phar install
