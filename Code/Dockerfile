@@ -10,14 +10,14 @@ RUN apt-get install -y \
 RUN /usr/local/bin/docker-php-ext-install mysqli pdo pdo_mysql zip xmlwriter
 RUN apt-get install libssl-dev -y
 
-
-
 RUN /usr/local/bin/docker-php-ext-install zip
 
 
 # Install mcrypt
 RUN apt-get install -y libmcrypt-dev
 RUN docker-php-ext-install mcrypt
+
+RUN apt-get install -y php7.2-xml
 
 # Install GD
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng12-dev
@@ -36,3 +36,12 @@ RUN docker-php-ext-install intl
 RUN a2enmod rewrite
 RUN usermod -u 1000 www-data
 RUN usermod -G staff www-data
+
+RUN apt-get install vim
+RUN chmod -R 777 /var/www/
+
+RUN apt-get install composer
+
+
+RUN cd /var/www/html/Code
+RUN composer install
