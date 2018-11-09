@@ -70,7 +70,7 @@ $app->map(['POST', 'PUT', 'DELETE'], '/', function ($request, $response, $args) 
     return $return;
 });
 
-$app->get('/allnews', function (Request $request, Response $response, array $args) {
+$app->get('/allnews[/]', function (Request $request, Response $response, array $args) {
     $header = $request->getserverParams();
 
     require_once(CONTROLLERS_PATH.'AllnewsController.php');
@@ -94,7 +94,7 @@ $app->map(['POST', 'PUT', 'DELETE'], '/allnews', function ($request, $response, 
     return $return;
 });
 
-$app->get('/newkeyword[/:{keyword}]', function (Request $request, Response $response, array $args) {
+$app->get('/newkeyword[/{keyword}]', function (Request $request, Response $response, array $args) {
     $header = $request->getserverParams();
 
     require_once(CONTROLLERS_PATH.'NewskeywordController.php');
@@ -124,7 +124,7 @@ $app->map(['POST', 'PUT', 'DELETE'], '/newkeyword', function ($request, $respons
     return $return;
 });
 
-$app->get('/fordate', function (Request $request, Response $response, array $args) {
+$app->get('/fordate[/:{inicio}]', function (Request $request, Response $response, array $args) {
     echo 'aqui ficara todas noticias fordate';
 
 });
@@ -134,8 +134,22 @@ $app->map(['POST', 'PUT', 'DELETE'], '/fordate', function ($request, $response, 
     return $return;
 });
 
-$app->get('/amounthour', function (Request $request, Response $response, array $args) {
-    echo 'aqui ficara todas noticias';
+$app->get('/amounthour[/]', function (Request $request, Response $response, array $args) {
+    $header = $request->getserverParams();
+
+    require_once(CONTROLLERS_PATH.'AmounthourController.php');
+
+    $AmounthourController = new AmounthourController();
+    $data = $AmounthourController->getCountLatsHour();
+
+    if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
+        $response->withHeader('Content-type', 'application/xml')->withStatus(200);
+        $xml = ArrayToXml::convert($data, 'namespace',true,'UTF-8');
+        return $response->write($xml);
+    }
+
+    $return = $response->withJson($data, 200)->withHeader('Content-type', 'application/json');
+    return $return;
 
 });
 $app->map(['POST', 'PUT', 'DELETE'], '/amounthour', function ($request, $response, $args) {
