@@ -3,5 +3,6 @@ php7:
   dockerfile: /home/projects/testVEconomico/Code/Dockerfile
   volumes:
     - /home/projects/testVEconomico/Code/:/var/www/html
+    - /home/projects/testVEconomico/Docs/apache2/sites-enabled:/etc/apache2/sites-enabled
   ports:
     - "8080:80"

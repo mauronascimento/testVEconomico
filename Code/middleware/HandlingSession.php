@@ -7,7 +7,6 @@ class HandlingSession {
 	private $serverParams;
 
 	public function __construct($request, $ini_array){
-		session_start();
 		$this->setIni($ini_array);
 		$this->setserverParams($request->getserverParams());
 		$this->checkOrigin();
