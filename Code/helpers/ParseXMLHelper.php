@@ -4,7 +4,8 @@ class ParseXMLHelper {
 
 
 
-	public static function getAndParseXML($limit = 0, $offset = 0){
+	public static function getAndParseXML($limit = 0, $offset = 0, $keyword = ''){
+		//preciso melhorar muito esse metodo
 		$return = array() ;
 		$rss = simplexml_load_file(URL_RSS);
 		$i = 0;
@@ -15,7 +16,7 @@ class ParseXMLHelper {
 				$return['itens'][$i]['title'] = (string)$value->title;
 				$return['itens'][$i]['link'] = (string)$value->link;  
 				$return['itens'][$i]['description'] = (string)$value->description;  
-				$return['itens'][$i]['data'] = (string)$value->pubDate;  
+				$return['itens'][$i]['data'] = (string)$value->pubDate;
 			}
 			$i++;
 		}

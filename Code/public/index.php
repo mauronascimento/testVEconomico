@@ -74,14 +74,13 @@ $app->get('/allnews', function (Request $request, Response $response, array $arg
     $header = $request->getserverParams();
 
     require_once(CONTROLLERS_PATH.'AllnewsController.php');
-    require_once('../helpers/ParseXMLHelper.php');
 
     $AllnewsController = new AllnewsController();
     $data = $AllnewsController->getAllNews();
 
     if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
         $response->withHeader('Content-type', 'application/xml')->withStatus(200);
-        $xml = ArrayToXml::convert($data);
+        $xml = ArrayToXml::convert($data, 'namespace',true,'UTF-8');
         return $response->write($xml);
     }
 
@@ -95,9 +94,29 @@ $app->map(['POST', 'PUT', 'DELETE'], '/allnews', function ($request, $response, 
     return $return;
 });
 
-$app->get('/newkeyword', function (Request $request, Response $response, array $args) {
-    echo 'aqui ficara todas noticias newkeyword';
+$app->get('/newkeyword[/:{keyword}]', function (Request $request, Response $response, array $args) {
+    $header = $request->getserverParams();
 
+    require_once(CONTROLLERS_PATH.'NewskeywordController.php');
+    require_once('../helpers/Validatekeyword.php');
+
+    $validate = Validatekeyword::validate($args);
+    if(!$validate){
+        $data = array('msg' => 'Not Acceptable','http_code' => 406); 
+        $return = $response->withJson($data, 406)->withHeader('Content-type', 'application/json');
+        return $return;
+    }
+    $NewskeywordController = new NewskeywordController();
+    $data = $NewskeywordController->getNewsForkeyword($validate);
+
+    if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
+        $response->withHeader('Content-type', 'application/xml')->withStatus(200);
+        $xml = ArrayToXml::convert($data, 'namespace',true,'UTF-8');
+        return $response->write($xml);
+    }
+
+    $return = $response->withJson($data, 200)->withHeader('Content-type', 'application/json');
+    return $return;
 });
 $app->map(['POST', 'PUT', 'DELETE'], '/newkeyword', function ($request, $response, $args) {
     $data = array('msg' => 'Method Not Allowed','http_code' => 405); 
