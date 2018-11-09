@@ -29,6 +29,7 @@ class ComposerStaticInit5f67f4092264deb635eef4a359f19dfa
         array (
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Yaml\\' => 23,
+            'Spatie\\ArrayToXml\\' => 18,
             'Slim\\Views\\' => 11,
             'Slim\\' => 5,
         ),
@@ -79,6 +80,10 @@ class ComposerStaticInit5f67f4092264deb635eef4a359f19dfa
         'Symfony\\Component\\Yaml\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
+        'Spatie\\ArrayToXml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/array-to-xml/src',
         ),
         'Slim\\Views\\' => 
         array (

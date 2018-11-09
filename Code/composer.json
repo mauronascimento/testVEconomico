@@ -1,4 +1,3 @@
-
 {
     "name": "slim/slim-skeleton",
     "description": "A Slim Framework skeleton application for rapid development",
@@ -15,7 +14,8 @@
         "php": ">=5.5.0",
         "slim/slim": "^3.1",
         "slim/php-view": "^2.0",
-        "monolog/monolog": "^1.17"
+        "monolog/monolog": "^1.17",
+        "spatie/array-to-xml": "^2.7"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.8 < 6.0"

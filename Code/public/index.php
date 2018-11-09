@@ -2,7 +2,7 @@
    
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-
+use Spatie\ArrayToXml\ArrayToXml;
 
 require_once('../vendor/autoload.php');
 require_once('../conf/conf.php');
@@ -32,10 +32,10 @@ $app->add(function ($request, $response, $next) {
         return $next($request, $response);
 });
 
-// //middleware memcached
-$app->add(function ($request, $response, $next) {
-	return $next($request, $response); // fazer depois
-});
+//middleware memcached
+// $app->add(function ($request, $response, $next) {
+// 	return $next($request, $response); // fazer depois
+// });
 
 //tratativa 404
 unset($app->getContainer()['notFoundHandler']);
@@ -59,7 +59,6 @@ $app->getContainer()['phpErrorHandler'] = function ($c) {
     };
 };
 
-
 //rotas
 $app->get('/', function (Request $request, Response $response, array $args) {
     echo 'aqui ficara o swagger';
@@ -72,10 +71,24 @@ $app->map(['POST', 'PUT', 'DELETE'], '/', function ($request, $response, $args) 
 });
 
 $app->get('/allnews', function (Request $request, Response $response, array $args) {
-    echo 'aqui ficara todas noticias';
+    $header = $request->getserverParams();
+
+    require_once(CONTROLLERS_PATH.'AllnewsController.php');
+    require_once('../helpers/ParseXMLHelper.php');
+
+    $AllnewsController = new AllnewsController();
+    $data = $AllnewsController->getAllNews();
+
+    if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
+        $response->withHeader('Content-type', 'application/xml')->withStatus(200);
+        $xml = ArrayToXml::convert($data);
+        return $response->write($xml);
+    }
+
+    $return = $response->withJson($data, 200)->withHeader('Content-type', 'application/json');
+    return $return;
 
 });
-
 $app->map(['POST', 'PUT', 'DELETE'], '/allnews', function ($request, $response, $args) {
     $data = array('msg' => 'Method Not Allowed','http_code' => 405); 
     $return = $response->withJson($data, 405)->withHeader('Content-type', 'application/json');

@@ -30,9 +30,12 @@ class HandlingSession {
 
 	public function validate(){
 
-		if(empty($_SESSION[$this->origin])){
+		if(!isset($_SESSION[$this->origin])){
 			if($this->origin == 'web'){
 				header('WWW-Authenticate: Basic realm="My Realm"');
+				if(!isset($this->serverParams['PHP_AUTH_USER']))
+					return false;
+
 				if($this->serverParams['PHP_AUTH_USER'] == $this->ini_array[$this->origin]['user'] 
 					&& $this->serverParams['PHP_AUTH_USER'] == $this->ini_array[$this->origin]['pass']){
 					session_start();
