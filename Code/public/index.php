@@ -124,8 +124,32 @@ $app->map(['POST', 'PUT', 'DELETE'], '/newkeyword', function ($request, $respons
     return $return;
 });
 
-$app->get('/fordate[/:{inicio}]', function (Request $request, Response $response, array $args) {
-    echo 'aqui ficara todas noticias fordate';
+$app->get('/fordate[/{initialDate}[/{endDate}]]', function (Request $request, Response $response, array $args) {
+    //0000-00-00
+    $header = $request->getserverParams();
+
+    require_once(CONTROLLERS_PATH.'FordateController.php');
+    require_once('../helpers/Validatekeyword.php');
+
+    $validate = Validatekeyword::validateDate($args);
+    
+    if(!$validate){
+        $data = array('msg' => 'Not Acceptable','http_code' => 406); 
+        $return = $response->withJson($data, 406)->withHeader('Content-type', 'application/json');
+        return $return;
+    }
+
+    $FordateController = new FordateController();
+    $data = $FordateController->getNewsForDate();
+
+    if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
+        $response->withHeader('Content-type', 'application/xml')->withStatus(200);
+        $xml = ArrayToXml::convert($data, 'namespace',true,'UTF-8');
+        return $response->write($xml);
+    }
+
+    $return = $response->withJson($data, 200)->withHeader('Content-type', 'application/json');
+    return $return;
 
 });
 $app->map(['POST', 'PUT', 'DELETE'], '/fordate', function ($request, $response, $args) {
