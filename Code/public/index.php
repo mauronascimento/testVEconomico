@@ -140,7 +140,7 @@ $app->get('/fordate[/{initialDate}[/{endDate}]]', function (Request $request, Re
     }
 
     $FordateController = new FordateController();
-    $data = $FordateController->getNewsForDate();
+    $data = $FordateController->getNewsForDate($args);
 
     if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
         $response->withHeader('Content-type', 'application/xml')->withStatus(200);

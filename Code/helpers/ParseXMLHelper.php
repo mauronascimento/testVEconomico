@@ -30,7 +30,20 @@ class ParseXMLHelper {
 					$return['itens'] = 'no occurrences found';
 				}
 			}
-			// fordate
+			
+			if($date && !empty($date)){
+				$dateorigin = new DateTime($value->pubDate);
+				if($dateorigin->format('Y-m-d') >= $date['initialDate'] ||
+					(isset($date['initialDate']) ? $dateorigin->format('Y-m-d') <= $date['endDate'] : false)){
+					$return['itens'][$i]['title'] = (string)$value->title;
+					$return['itens'][$i]['link'] = (string)$value->link;  
+					$return['itens'][$i]['description'] = (string)$value->description;  
+					$return['itens'][$i]['data'] = (string)$value->pubDate;
+				}else{
+					$return['itens'] = 'no occurrences found';
+				}
+
+			}
 
 			if($last){
 				if(!array_key_exists('amountLatHour', $return))
