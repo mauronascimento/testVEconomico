@@ -18,3 +18,28 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 necessario criar o diretorio /home/projects/testVEconomico/
 
 RUN php composer.phar install
+
+
+Teste Valor Econômico
+==============
+
+Fluxo para instalação da API.
+
+### Pré Requisitos
+1. SO utilizado -> Ubuntu 18.04
+2. Versão do Docker -> 18.09.0 
+3. Versão do docker-compose -> 1.21.2
+
+### Instalação
+
+1. Crie no ambiente local a estrutura '/home/projects' com `$ cd /home && mkdir projects1`;
+2. Altere a permissão com usuário sudo para 755 com `chmod -R 755 /home/projects`;
+3. Faça o clone deste projeto com `git clone https://github.com/mauronascimento/testVEconomico.git` dentro do diretório criado;
+4. Entre na pasta '/home/projects/testVEconomico/Code' e rode o comando `docker-compose up`
+
+> **Observação:** A utilização de usuário sudo pode variar de acordo com as configurações da máquina local
+
+### Testando a aplicação
+
+1. Abra o browser e visite a página `http://localhost:9000`
+
