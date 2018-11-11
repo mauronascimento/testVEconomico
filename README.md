@@ -19,9 +19,9 @@ Fluxo para instalação da API.
 
 ### Autenticação da aplicação
 
-A aplicação foi projetada para ter dois tipos de autenticação : WEB(basic Auth) e entre aplicações(tunel key e secret key).
+- A aplicação foi projetada para ter dois tipos de autenticação : WEB(basic Auth) e entre aplicações(tunel key e secret key).
 
-Ambos se encontram em 'Code/conf/conf.ini' .
+- Ambos se encontram em 'Code/conf/conf.ini' .
 
 #### Exemplo
 
@@ -41,6 +41,5 @@ Ambos se encontram em 'Code/conf/conf.ini' .
 `curl -X GET "http://localhost:8080/amounthour" -H  "accept: application/json"`
 `curl -X GET "http://localhost:8080/newkeyword/{keyword}" -H  "accept: application/xml"`
 `curl -X GET "http://localhost:8080/newkeyword/{keyword}" -H  "accept: application/json"`
-curl -X GET "http://localhost:8080/fordate/{initialDate}/{endDate}" -H  "accept: application/xml"
-curl -X GET "http://localhost:8080/fordate/{initialDate}/{endDate}" -H  "accept: application/json"
-`
+`curl -X GET "http://localhost:8080/fordate/{initialDate}/{endDate}" -H  "accept: application/xml"`
+`curl -X GET "http://localhost:8080/fordate/{initialDate}/{endDate}" -H  "accept: application/json"`
