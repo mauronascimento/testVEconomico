@@ -46,5 +46,6 @@ RUN php -r "if (hash_file('sha384', 'composer-setup.php') === '93b54496392c06277
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 
+#RUN php composer.phar install -- arrumar posteriormente
 
 #nao esquecer do memcached

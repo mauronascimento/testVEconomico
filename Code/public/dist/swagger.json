@@ -114,7 +114,7 @@
 				},
 			},
 		},
-		"/fordate/initialDate/{endDate}": {
+		"/fordate/{initialDate}/{endDate}": {
 			"get": {
 				"tags": ["fordate"],
 				"summary": "Find news for date",

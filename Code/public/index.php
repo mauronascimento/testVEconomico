@@ -78,7 +78,8 @@ $app->get('/allnews[/]', function (Request $request, Response $response, array $
     $AllnewsController = new AllnewsController();
     $data = $AllnewsController->getAllNews();
 
-    if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
+    if((isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml')
+        || (isset($header['HTTP_ACCEPT']) && $header['HTTP_ACCEPT'] == 'application/xml')){
         $response->withHeader('Content-type', 'application/xml')->withStatus(200);
         $xml = ArrayToXml::convert($data, 'namespace',true,'UTF-8');
         return $response->write($xml);
@@ -98,9 +99,9 @@ $app->get('/newkeyword[/{keyword}]', function (Request $request, Response $respo
     $header = $request->getserverParams();
 
     require_once(CONTROLLERS_PATH.'NewskeywordController.php');
-    require_once('../helpers/Validatekeyword.php');
+    require_once('../helpers/Validate.php');
 
-    $validate = Validatekeyword::validate($args);
+    $validate = Validate::validateKeyword($args);
     if(!$validate){
         $data = array('msg' => 'Not Acceptable','http_code' => 406); 
         $return = $response->withJson($data, 406)->withHeader('Content-type', 'application/json');
@@ -109,7 +110,8 @@ $app->get('/newkeyword[/{keyword}]', function (Request $request, Response $respo
     $NewskeywordController = new NewskeywordController();
     $data = $NewskeywordController->getNewsForkeyword($validate);
 
-    if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
+    if((isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml')
+        || (isset($header['HTTP_ACCEPT']) && $header['HTTP_ACCEPT'] == 'application/xml')){
         $response->withHeader('Content-type', 'application/xml')->withStatus(200);
         $xml = ArrayToXml::convert($data, 'namespace',true,'UTF-8');
         return $response->write($xml);
@@ -129,9 +131,9 @@ $app->get('/fordate[/{initialDate}[/{endDate}]]', function (Request $request, Re
     $header = $request->getserverParams();
 
     require_once(CONTROLLERS_PATH.'FordateController.php');
-    require_once('../helpers/Validatekeyword.php');
+    require_once('../helpers/Validate.php');
 
-    $validate = Validatekeyword::validateDate($args);
+    $validate = Validate::validateDate($args);
     
     if(!$validate){
         $data = array('msg' => 'Not Acceptable','http_code' => 406); 
@@ -142,7 +144,8 @@ $app->get('/fordate[/{initialDate}[/{endDate}]]', function (Request $request, Re
     $FordateController = new FordateController();
     $data = $FordateController->getNewsForDate($args);
 
-    if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
+    if((isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml')
+        || (isset($header['HTTP_ACCEPT']) && $header['HTTP_ACCEPT'] == 'application/xml')){
         $response->withHeader('Content-type', 'application/xml')->withStatus(200);
         $xml = ArrayToXml::convert($data, 'namespace',true,'UTF-8');
         return $response->write($xml);
@@ -166,7 +169,8 @@ $app->get('/amounthour[/]', function (Request $request, Response $response, arra
     $AmounthourController = new AmounthourController();
     $data = $AmounthourController->getCountLatsHour();
 
-    if(isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml'){
+    if((isset($header['HTTP_RETURNTYPE']) && $header['HTTP_RETURNTYPE'] == 'application/xml')
+        || (isset($header['HTTP_ACCEPT']) && $header['HTTP_ACCEPT'] == 'application/xml')){
         $response->withHeader('Content-type', 'application/xml')->withStatus(200);
         $xml = ArrayToXml::convert($data, 'namespace',true,'UTF-8');
         return $response->write($xml);
