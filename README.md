@@ -19,13 +19,13 @@ Fluxo para instalação da API.
 
 ### Autenticação da aplicação
 
-	A aplicação foi projetada para ter dois tipos de autenticação : WEB(basic Auth) e entre aplicações(tunel key e secret key).
+--	A aplicação foi projetada para ter dois tipos de autenticação : WEB(basic Auth) e entre aplicações(tunel key e secret key).
 
-	Ambos se encontram em 'Code/conf/conf.ini' .
+--	Ambos se encontram em 'Code/conf/conf.ini' .
 
 ## Exemplo
 
-![screen shot](https://github.com/mauronascimento/testVEconomico/Docs/images/example.png)
+![screen shot](https://raw.githubusercontent.com/mauronascimento/testVEconomico/master/Docs/images/example.png)
 
 ### Testando a aplicação
 
