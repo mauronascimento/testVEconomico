@@ -34,8 +34,6 @@ Fluxo para instalação da API.
 
 ### Exemplos de requisiçoes
 
-{% filename %}linha de comando do PythonAnywhere{% endfilename %}
-
 - curl -X GET "http://localhost:8080/allnews" -H  "accept: application/xml"
 - curl -X GET "http://localhost:8080/allnews" -H  "accept: application/json"
 - curl -X GET "http://localhost:8080/amounthour" -H  "accept: application/xml"
