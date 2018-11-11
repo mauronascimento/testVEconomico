@@ -32,7 +32,7 @@ $app->add(function ($request, $response, $next) {
         return $next($request, $response);
 });
 
-//middleware memcached
+//middleware memcached nao esquecer de implementar
 // $app->add(function ($request, $response, $next) {
 // 	return $next($request, $response); // fazer depois
 // });
@@ -61,7 +61,7 @@ $app->getContainer()['phpErrorHandler'] = function ($c) {
 
 //rotas
 $app->get('/', function (Request $request, Response $response, array $args) {
-    echo 'aqui ficara o swagger';
+    require_once('dist/index.html');
 
 });
 $app->map(['POST', 'PUT', 'DELETE'], '/', function ($request, $response, $args) {

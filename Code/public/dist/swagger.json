@@ -1,0 +1,297 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "Teste Valor Economico",
+	},
+	"paths": {
+		"/allnews": {
+			"get": {
+				"tags": ["allnews"],
+				"summary": "Find all news",
+				"description": "Find all the news, do not pass any parameters",
+				"produces": ["application/xml", "application/json"],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/allnews"
+							},
+							"xml": {
+								"name":"namespace"
+							}
+
+						}
+					},
+					"404": {
+						"description": "Route Error"
+					},
+					"500": {
+						"description": "Application Error"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+				},
+				"deprecated": false
+			}
+		},
+
+		"/amounthour": {
+			"get": {
+				"tags": ["amounthour"],
+				"summary": "Find breaking news",
+				"description": "Find breaking news",
+				"produces": ["application/xml", "application/json"],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/amounthour"
+							},
+							"xml": {
+								"name":"namespace"
+							}
+
+						}
+					},
+					"404": {
+						"description": "Route Error"
+					},
+					"500": {
+						"description": "Application Error"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+				},
+				"deprecated": false
+			}
+		},
+		"/newkeyword/{keyword}": {
+			"get": {
+				"tags": ["newkeyword"],
+				"summary": "Find news by keyword",
+				"description": "Find news by keyword",
+				"produces": ["application/xml", "application/json"],
+				"parameters": [{
+					"name": "keyword",
+					"in": "path",
+					"description": "Keyword String",
+					"required": true,
+					"type": "string",
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/newkeyword"
+							},
+							"xml": {
+								"name":"namespace"
+							}
+
+						}
+					},
+					"404": {
+						"description": "Route Error"
+					},
+					"500": {
+						"description": "Application Error"
+					},
+					"406": {
+						"description": "Invalid Parameters"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+				},
+			},
+		},
+		"/fordate/initialDate/{endDate}": {
+			"get": {
+				"tags": ["fordate"],
+				"summary": "Find news for date",
+				"description": "Find news for date",
+				"produces": ["application/xml", "application/json"],
+				"parameters": [{
+					"name": "initialDate",
+					"in": "path",
+					"description": "Date String",
+					"required": true,
+					"type": "string",
+				},
+				{
+					"name": "endDate",
+					"in": "path",
+					"description": "Date String",
+					"required": false,
+					"type": "string",
+				}
+			],
+
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/fordate"
+							},
+							"xml": {
+								"name":"namespace"
+							}
+
+						}
+					},
+					"404": {
+						"description": "Route Error"
+					},
+					"500": {
+						"description": "Application Error"
+					},
+					"406": {
+						"description": "Invalid Parameters"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+				},
+			},
+		},
+
+	},
+
+	"definitions": {
+
+		"ApiResponse": {
+			"type": "object",
+			"properties": {
+				"code": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"type": {
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				}
+			}
+		},
+		"allnews": {
+			"type": "object",
+			"properties": {
+				"owner": {
+					"type": "string",
+				},
+				"qtd": {
+					"type": "integer"
+				},
+				"itens": {
+					"type": "array",
+					"items": {
+			"type": "object",
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"link": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"data": {
+						"type": "string"
+					},
+				},
+				"xml": {
+					"name": "itens",
+				},
+					}
+				}
+			}
+		},
+		"amounthour": {
+			"type": "object",
+			"properties": {
+				"owner": {
+					"type": "string",
+				},
+				"amountLatHour": {
+					"type": "integer"
+				},
+
+			}
+		},
+		"newkeyword": {
+			"type": "object",
+			"properties": {
+				"owner": {
+					"type": "string",
+				},
+				"itens": {
+					"type": "array",
+					"items": {
+			"type": "object",
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"link": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"data": {
+						"type": "string"
+					},
+				},
+				"xml": {
+					"name": "itens",
+				},
+					}
+				}
+			}
+		},
+		"fordate": {
+			"type": "object",
+			"properties": {
+				"owner": {
+					"type": "string",
+				},
+				"itens": {
+					"type": "array",
+					"items": {
+			"type": "object",
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"link": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"data": {
+						"type": "string"
+					},
+				},
+				"xml": {
+					"name": "itens",
+				},
+					}
+				}
+			}
+		},
+	},
+}
