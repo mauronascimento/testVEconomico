@@ -4,9 +4,8 @@ Teste Valor Econômico
 Fluxo para instalação da API.
 
 ### Pré Requisitos
-1. SO utilizado -> Ubuntu 18.04;
-2. Versão do Docker -> 18.09.0;
-3. Versão do docker-compose -> 1.21.2;
+1. Versão do Docker -> 18.09.0;
+2. Versão do docker-compose -> 1.21.2;
 
 ### Instalação
 
